@@ -74,129 +74,22 @@ const App = ({ manifestURL, startCanvasTime }) => {
             <div style={{ flex: 1, padding: '0 20px' }}>
               <MediaPlayer enableFileDownload={true} enablePlaybackRate={true} />
               <div style={{ padding: '20px 0' }}>
-                <AutoAdvanceToggle />
-                <StructuredNavigation />
+                {/* <AutoAdvanceToggle />
+                <StructuredNavigation /> */}
+                <MetadataDisplay showHeading={false} />
               </div>
             </div>
             <div style={{ flex: 1, display: 'flex', flexDirection: 'column', padding: '0 20px' }}>
-              <Tabs tabValues={tabValues} manifestUrl={manifestUrl} />
+              {/* <Tabs tabValues={tabValues} manifestUrl={manifestUrl} /> */}
+              <Transcript
+                playerID="iiif-media-player"
+                manifestUrl={manifestUrl}
+              />
             </div>
           </div>
         </IIIFPlayer>
       </div >
     </div >
-  );
-};
-
-
-/*Reference: https://accessible-react.eevis.codes/components/tabs */
-const Tabs = ({ tabValues, manifestUrl }) => {
-  const [activeTab, setActiveTab] = React.useState(1);
-
-  let tabs = [];
-
-  const handleClick = (index) => {
-    setActiveTab(index);
-  };
-
-  const handleNextTab = (firstTabInRound, nextTab, lastTabInRound) => {
-    const tabToSelect =
-      activeTab === lastTabInRound ? firstTabInRound : nextTab;
-    setActiveTab(tabToSelect);
-    tabValues[tabToSelect].ref.current.focus();
-  };
-
-  const handleKeyPress = (event) => {
-    const tabCount = Object.keys(tabValues).length - 1;
-
-    if (event.key === "ArrowLeft") {
-      const last = tabCount;
-      const next = activeTab - 1;
-      handleNextTab(last, next, 0);
-    }
-    if (event.key === "ArrowRight") {
-      const first = 0;
-      const next = activeTab + 1;
-      handleNextTab(first, next, tabCount);
-    }
-  };
-
-  tabValues.map((t, index) => {
-    tabs.push(
-      <Tab
-        key={index}
-        id={t.title.toLowerCase()}
-        tabPanelId={`${t.title.toLowerCase()}Tab`}
-        index={index}
-        handleChange={handleClick}
-        activeTab={activeTab}
-        title={t.title}
-        tabRef={t.ref}
-      />
-    );
-  });
-
-  return (
-    <section className="tabs-wrapper">
-      <div className="switcher">
-        <ul
-          role="tablist"
-          className="tablist switcher"
-          aria-label="more Ramp components in tabs"
-          onKeyDown={handleKeyPress}>
-          {tabs}
-        </ul>
-      </div>
-      <TabPanel id="detailsTab" tabId="details" tabIndex={0} activeTab={activeTab}>
-        <MetadataDisplay showHeading={false} />
-      </TabPanel>
-      <TabPanel id="transcriptsTab" tabId="transcripts" tabIndex={1} activeTab={activeTab}>
-        <Transcript
-          playerID="iiif-media-player"
-          manifestUrl={manifestUrl}
-        />
-      </TabPanel>
-      <TabPanel id="filesTab" tabId="files" tabIndex={2} activeTab={activeTab}>
-        <SupplementalFiles showHeading={false} />
-      </TabPanel>
-      <TabPanel id="markersTab" tabId="markers" tabIndex={3} activeTab={activeTab}>
-        <MarkersDisplay showHeading={false} />
-      </TabPanel>
-    </section>
-  );
-};
-
-const Tab = ({ id, tabPanelId, index, handleChange, activeTab, title, tabRef }) => {
-  const handleClick = () => { handleChange(index); };
-  return (
-    <li role="presentation">
-      <button
-        role="tab"
-        id={id}
-        aria-selected={activeTab === index}
-        aria-controls={tabPanelId}
-        onClick={handleClick}
-        tabIndex={activeTab === index ? 0 : -1}
-        ref={tabRef}
-      >
-        {title}
-      </button>
-    </li>
-  );
-};
-
-const TabPanel = ({ id, tabId, activeTab, tabIndex, children }) => {
-  return (
-    <section
-      role="tabpanel"
-      id={id}
-      aria-labelledby={tabId}
-      hidden={activeTab !== tabIndex}
-      tabIndex={0}
-      className="tabpanel"
-    >
-      {children}
-    </section>
   );
 };
 
