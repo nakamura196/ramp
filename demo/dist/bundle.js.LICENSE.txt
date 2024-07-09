@@ -47,7 +47,7 @@ https://github.com/nodeca/pako/blob/main/LICENSE
  * MIT Licensed
  */
 
-/*! @name @videojs/http-streaming @version 3.12.1 @license Apache-2.0 */
+/*! @name @videojs/http-streaming @version 3.10.0 @license Apache-2.0 */
 
 /*! @name aes-decrypter @version 4.0.1 @license Apache-2.0 */
 
@@ -55,7 +55,9 @@ https://github.com/nodeca/pako/blob/main/LICENSE
 
 /*! @name pkcs7 @version 1.0.4 @license Apache-2.0 */
 
-/*! @name videojs-contrib-quality-levels @version 4.1.0 @license Apache-2.0 */
+/*! @name videojs-contrib-quality-levels @version 4.0.0 @license Apache-2.0 */
+
+/*! http://mths.be/fromcodepoint v0.1.0 by @mathias */
 
 /*! ieee754. BSD-3-Clause License. Feross Aboukhadijeh <https://feross.org/opensource> */
 
