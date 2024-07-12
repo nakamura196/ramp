@@ -17,7 +17,8 @@
     "test:watch": "jest --watch",
     "test:debug": "node --inspect $(npm bin)/jest --runInBand",
     "demo": "webpack serve --mode=development",
-    "demo:build": "webpack --mode=production"
+    "demo:build": "webpack --mode=production",
+    "mdx": "s3cmd sync demo/dist/ s3://rekion/ramp/ --exclude '.DS_Store' && s3cmd setacl s3://rekion/ramp/ --acl-public --recursive"
   },
   "contributors": [
     "Dananji Withana <dwithana@iu.edu>",
